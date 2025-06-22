@@ -1,0 +1,30 @@
+MINDSDB_INFRA:
+  MINDSDB_HOST: 127.0.0.1
+  MINDSDB_PORT: 47334
+
+KNOWLEDGE_BASE:
+  NAME: arxiv_kb
+  EMBEDDING_MODEL: text-embedding-3-large
+  RERANKING_MODEL: gpt-4o
+  OPENAI_API_KEY: <sk-proj>
+  METADATA_COLUMNS:
+    - authors
+    - categories
+    - published_year
+    - primary_category
+    - article_id
+    - title
+    - summary
+  CONTENT_COLUMNS:
+    - text
+
+POSTGRES:
+  HOST: localhost
+  PORT: 5432
+  DATABASE: arxiv_psql_db
+  USER: postgres
+  PASSWORD: postgres
+  TABLE_NAME: arxiv_txt
+
+AGENT:
+  OPENAI_MODEL: gpt-4o
