@@ -35,6 +35,7 @@ Whether you're a researcher, student, or curious mind, PaperSense helps you expl
 - **Embeddings**: OpenAI
 - **Search Engine**: MindsDB & ChromaDB
 - **Data Source**: [arXiv API](https://arxiv.org/help/api)
+- **Python Linter** : [ruff](https://docs.astral.sh/ruff/)
 
 ---
 
