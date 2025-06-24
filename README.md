@@ -23,6 +23,8 @@ Whether you're a researcher, student, or curious mind, PaperSense helps you expl
 - 📚 **Real-Time arXiv Data**: Keeps your search results current with arXiv's latest updates.
 - 🌐 **Clean Web UI**: Intuitive interface to search, explore, and read abstracts.
 - 📈 **Ranking by Relevance**: Results ranked by semantic closeness—not just keyword count.
+- 🧠 **Paper-Specific Chatbot**: Powered by MindsDB AI agents, enabling intelligent, context-aware conversations with individual research papers.
+
 
 ---
 
