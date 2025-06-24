@@ -4,7 +4,7 @@ MINDSDB_INFRA:
 
 KNOWLEDGE_BASE:
   NAME: arxiv_kb
-  EMBEDDING_MODEL: text-embedding-3-large
+  EMBEDDING_MODEL: text-embedding-3-small
   RERANKING_MODEL: gpt-4o
   OPENAI_API_KEY: <sk-proj>
   METADATA_COLUMNS:
@@ -15,6 +15,10 @@ KNOWLEDGE_BASE:
     - article_id
     - title
     - summary
+  STORAGE:
+    ENABLE_PG_VECTOR: False
+    PG_VECTOR_DATABASE: pgvec_db
+    PG_VECTOR_TABLE: vec_table
   CONTENT_COLUMNS:
     - text
 
@@ -28,3 +32,9 @@ POSTGRES:
 
 AGENT:
   OPENAI_MODEL: gpt-4o
+
+APP:
+  LOG_LEVEL: INFO
+  LOG_FORMAT: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  LOAD_SAMPLE_DATA: False
+  SAMPLE_DATA_COUNT: 50

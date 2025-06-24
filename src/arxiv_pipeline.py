@@ -15,7 +15,6 @@ from .mindsdb import mdb_server, knowledge_base
 
 # Constants
 MAX_CHUNKS_TO_PROCESS = 10
-CHUNK_SIZE = 600
 KB_NAME_SUFFIX = "_kb"
 
 logger = logging.getLogger(__name__)
@@ -159,8 +158,6 @@ class ArxivProcessPipeline:
         summary = metadata.get("summary", "")
         
         full_text = "\n".join([title, summary, text_content])
-        # Remove null bytes that can cause issues
-        full_text = full_text.replace("\x00", "")
         
         return full_text
 
@@ -176,7 +173,7 @@ class ArxivProcessPipeline:
         Returns:
             List of text chunks with metadata
         """
-        chunks = utils.chunk_text(full_text, CHUNK_SIZE)
+        chunks = utils.chunk_text(full_text, 2000, 300)
         
         # Add metadata to each chunk
         for chunk in chunks:
@@ -197,6 +194,7 @@ class ArxivProcessPipeline:
             ArxivProcessingError: If database insertion fails
         """
         try:
+            full_text = utils.escape_text(full_text)
             row_data = {"text": full_text, **metadata}
             self._postgres_client.insert_article(row_data)
             logger.info("Successfully stored paper data in PostgreSQL")
@@ -220,6 +218,21 @@ class ArxivProcessPipeline:
         except Exception as e:
             raise ArxivProcessingError(f"Failed to store in paper KB: {e}") from e
 
+    def create_index_on_kb(self):
+        kb_name = utils.generate_kb_name(self.arxiv_id)
+        self._knowledge_base.create_index(kb_name)
+
+
+    def _query_postgres(self):
+        logger.info(f"Querying {config.psql.DATABASE}.{config.psql.TABLE_NAME} for {self.arxiv_id}")
+        select_query = f"SELECT * FROM {config.psql.TABLE_NAME} where article_id = '{self.arxiv_id}';"
+        res = self._postgres_client.execute_query(select_query, {}, True)
+        if res: 
+            res = dict(res[0])
+            del res["id"]
+            return res
+        return {}
+
     def process(self) -> None:
         """
         Execute the complete ArXiv paper processing pipeline.
@@ -236,29 +249,42 @@ class ArxivProcessPipeline:
             ArxivProcessingError: If any step in the pipeline fails
         """
         try:
-            logger.info(f"Starting processing pipeline for ArXiv ID: {self.arxiv_id}")
+            existing_paper_data = self._query_postgres()
+
+            if existing_paper_data:
+                logger.info(f"Using existing data for {self.arxiv_id}")
+                full_text = existing_paper_data["text"]
+
+                del existing_paper_data["text"]
+
+                metadata = dict(existing_paper_data)
+            else:
+                logger.info(f"Starting processing pipeline for ArXiv ID: {self.arxiv_id}")
             
-            # Step 1: Download and extract text
-            text_content = self._download_and_extract_text()
-            
-            # Step 2: Get metadata
-            metadata = self.get_paper_metadata()
-            
-            # Step 3: Prepare full text
-            full_text = self._prepare_full_text(text_content, metadata)
-            
+                # Step 1: Download and extract text
+                text_content = self._download_and_extract_text()
+                
+                # Step 2: Get metadata
+                metadata = self.get_paper_metadata()
+                
+                # Step 3: Prepare full text
+                full_text = self._prepare_full_text(text_content, metadata)
+                
+                # Step 6: Store in PostgreSQL
+                self._store_in_postgres(full_text, metadata)
+
+            full_text = utils.escape_text(full_text)
             # Step 4: Process and chunk text
             chunks = self._process_and_chunk_text(full_text, metadata)
-            
-            # Step 5: Store in main knowledge base
-            self.add_to_main_knowledge_base(chunks)
-            
-            # Step 6: Store in PostgreSQL
-            self._store_in_postgres(full_text, metadata)
+
+            if not existing_paper_data:
+                # Step 5: Store in main knowledge base
+                self.add_to_main_knowledge_base(chunks)
             
             # Step 7: Create and populate paper-specific knowledge base
             self.create_paper_knowledge_base()
             self._store_in_paper_kb(chunks)
+            self.create_index_on_kb()
             
             logger.info(f"Successfully completed processing for ArXiv ID: {self.arxiv_id}")
             

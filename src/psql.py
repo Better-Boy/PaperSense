@@ -238,7 +238,7 @@ class PostgresHandler:
             PostgresQueryError: If query execution fails.
         """
         try:
-            with self.get_cursor() as cur:
+            with self.get_cursor(True) as cur:
                 if params:
                     cur.execute(query, params)
                 else:
@@ -246,7 +246,7 @@ class PostgresHandler:
                 
                 if fetch_results:
                     results = cur.fetchall()
-                    logger.debug(f"Query returned {len(results)} rows")
+                    logger.info(f"Query returned {len(results)} rows")
                     return results
                 else:
                     logger.debug("Query executed successfully (no results returned)")
