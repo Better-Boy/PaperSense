@@ -1,0 +1,13 @@
+arxiv
+fastapi
+langchain_text_splitters
+mindsdb_sdk
+psycopg2_binary
+pymupdf
+pyyaml
+requests
+mindsdb_sql
+uvicorn
+Jinja2
+pydantic
+pydantic-settings
