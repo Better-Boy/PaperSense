@@ -1,10 +1,12 @@
-# 🧠 PaperSense  
-**Semantic Search for Scientific Papers on arXiv**  
+<h1>
+  <img src="https://cdn-icons-png.flaticon.com/512/2541/2541988.png" alt="Logo" width="30" style="vertical-align: middle;">
+  Papersense
+</h1>
 *Search smarter. Discover deeper.*
 
 ---
 
-![papersense-banner](https://cdn-icons-png.flaticon.com/512/2541/2541988.png) <!-- Optional: Add a banner -->
+![papersense-banner]() <!-- Optional: Add a banner -->
 
 ## 🚀 Overview
 
