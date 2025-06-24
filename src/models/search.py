@@ -1,7 +1,7 @@
 """Search-related Pydantic models."""
 
 from pydantic import BaseModel, Field, validator
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 
 
 class SearchFilters(BaseModel):

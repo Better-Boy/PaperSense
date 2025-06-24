@@ -7,7 +7,7 @@ AI agents about specific papers using MindsDB integration.
 import logging
 import os
 from contextlib import asynccontextmanager
-from typing import Any, Dict, Optional
+from typing import Dict, Optional
 
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.responses import HTMLResponse, JSONResponse
@@ -18,7 +18,7 @@ from src import arxiv_pipeline, psql, utils, config_loader as config
 from src.mindsdb import agent, knowledge_base, mdb_server
 from src.models import ChatRequest, ChatResponse, SearchResponse, ErrorResponse
 from src.models.common import HealthStatus
-from src.models.search import SearchFilters, PaperResult
+from src.models.search import PaperResult
 
 os.makedirs('logs', exist_ok=True)
 

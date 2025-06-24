@@ -1,7 +1,7 @@
 """MindsDB server connection and query execution module."""
 
 import logging
-from typing import List, Dict, Any, Optional, Union
+from typing import List, Dict, Any
 
 import mindsdb_sdk
 import requests

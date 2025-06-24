@@ -1,6 +1,6 @@
 """Pydantic configuration models for PaperSense application."""
 
-from typing import Optional, List
+from typing import List
 from pydantic import BaseModel, Field, validator
 from pydantic_settings import BaseSettings
 

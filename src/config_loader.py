@@ -6,14 +6,7 @@ import logging
 from pathlib import Path
 from typing import Dict, Any, Optional
 
-from .models.config import (
-    PaperSenseConfig,
-    MindsDBConfig,
-    PostgresConfig,
-    KnowledgeBaseConfig,
-    AgentConfig,
-    AppConfig
-)
+from .models.config import PaperSenseConfig
 
 # Configure logger for this module
 logger = logging.getLogger(__name__)
@@ -39,7 +32,7 @@ def load_config_from_yaml(config_path: str) -> Dict[str, Any]:
         with open(config_path, 'r', encoding='utf-8') as config_file:
             data = yaml.safe_load(config_file)
         logger.debug(f"Successfully loaded YAML configuration with {len(data) if data else 0} top-level keys")
-    except FileNotFoundError as e:
+    except FileNotFoundError:
         logger.error(f"Configuration file not found: {config_path}")
         raise FileNotFoundError(f"Configuration file not found: {config_path}")
     except yaml.YAMLError as e:

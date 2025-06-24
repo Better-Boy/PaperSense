@@ -6,12 +6,12 @@ in a knowledge base system.
 """
 
 import logging
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 
 import arxiv
 
 from . import utils, config_loader as config, psql
-from .mindsdb import mdb_server, knowledge_base
+from .mindsdb import knowledge_base
 
 # Constants
 MAX_CHUNKS_TO_PROCESS = 10
