@@ -1,6 +1,6 @@
 """Search-related Pydantic models."""
 
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 from typing import List, Optional
 
 
@@ -21,7 +21,7 @@ class SearchFilters(BaseModel):
         example=2023
     )
     
-    @validator('category')
+    @field_validator('category')
     def validate_category(cls, value: Optional[str]) -> Optional[str]:
         """Validate category format.
         
@@ -135,7 +135,7 @@ class SearchRequest(BaseModel):
         description="Optional search filters"
     )
     
-    @validator('query')
+    @field_validator('query')
     def validate_query(cls, value: str) -> str:
         """Validate and clean search query.
         

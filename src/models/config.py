@@ -8,28 +8,28 @@ from pydantic_settings import BaseSettings
 class MindsDBConfig(BaseModel):
     """MindsDB infrastructure configuration."""
     
-    MINDSDB_HOST: str = Field(default="localhost", description="MindsDB host address")
-    MINDSDB_PORT: int = Field(default=47334, description="MindsDB port number")
+    host: str = Field(default="localhost", description="MindsDB host address")
+    port: int = Field(default=47334, description="MindsDB port number")
 
 class AppConfig(BaseModel):
     """App settings configuration."""
     
-    LOG_LEVEL: str = Field(default="INFO", description="Logging Level")
-    LOG_FORMAT: str = Field(default="%(asctime)s - %(name)s - %(levelname)s - %(message)s", description="Logging Format")
-    LOAD_SAMPLE_DATA: bool = Field(default=False, description="Load sample data")
-    SAMPLE_DATA_COUNT: int = Field(default=50, description="Count of randomly sampled records inserted into KB")
+    log_level: str = Field(default="INFO", description="Logging Level")
+    log_format: str = Field(default="%(asctime)s - %(name)s - %(levelname)s - %(message)s", description="Logging Format")
+    load_sample_data: bool = Field(default=False, description="Load sample data")
+    sample_data_count: int = Field(default=50, description="Count of randomly sampled records inserted into KB")
 
 class PostgresConfig(BaseModel):
     """PostgreSQL database configuration."""
     
-    HOST: str = Field(default="localhost", description="PostgreSQL host address")
-    PORT: int = Field(default=5432, description="PostgreSQL port number")
-    USER: str = Field(default="postgres", description="PostgreSQL username")
-    PASSWORD: str = Field(default="", description="PostgreSQL password")
-    DATABASE: str = Field(default=None, description="PostgreSQL database name")
-    TABLE_NAME: str = Field(default=None, description="PostgreSQL table name")
+    host: str = Field(default="localhost", description="PostgreSQL host address")
+    port: int = Field(default=5432, description="PostgreSQL port number")
+    user: str = Field(default="postgres", description="PostgreSQL username")
+    password: str = Field(default="", description="PostgreSQL password")
+    database: str = Field(default=None, description="PostgreSQL database name")
+    table_name: str = Field(default=None, description="PostgreSQL table name")
     
-    @validator('PORT')
+    @validator('port')
     def validate_port(cls, v):
         """Validate port number is in valid range."""
         if not (1 <= v <= 65535):
@@ -37,53 +37,56 @@ class PostgresConfig(BaseModel):
         return v
 
 class StorageConfig(BaseModel):
-    ENABLE_PG_VECTOR: bool = Field(default=None, description="Flag to enable or disable pyvector")
-    PG_VECTOR_DATABASE: str = Field(default=None, description="pg vector db name to use")
-    PG_VECTOR_TABLE: str = Field(default=None, description="pg vector table name to use")
+    """ KB storage config """
+    enable_pg_vector: bool = Field(default=None, description="Flag to enable or disable pyvector")
+    pg_vector_database: str = Field(default=None, description="pg vector db name to use")
+    pg_vector_table: str = Field(default=None, description="pg vector table name to use")
 
 class KnowledgeBaseConfig(BaseModel):
     """Knowledge base configuration."""
-    
-    NAME: str = Field(default=None, description="Knowledge base name")
-    RERANKING_MODEL: str = Field(default=None, description="Reranking model name")
-    EMBEDDING_MODEL: str = Field(default=None, description="Embedding model name")
-    METADATA_COLUMNS: List[str] = Field(default=[], description="List of metadata columns")
-    CONTENT_COLUMNS: List[str] = Field(default=[], description="List of content columns")
-    OPENAI_API_KEY: str = Field(default=None, description="Open AI api key")
-    STORAGE: StorageConfig = Field(default_factory=StorageConfig)
-
+    name: str = Field(default=None, description="Knowledge base name")
+    reranking_model: str = Field(default=None, description="Reranking model name")
+    embedding_model: str = Field(default=None, description="Embedding model name")
+    metadata_columns: List[str] = Field(default=[], description="List of metadata columns")
+    content_columns: List[str] = Field(default=[], description="List of content columns")
+    openai_api_key: str = Field(default=None, description="Open AI api key")
+    storage: StorageConfig = Field(default_factory=StorageConfig)
 
 class AgentConfig(BaseModel):
     """Agent configuration."""
     
-    OPENAI_MODEL: str = Field(default=None, description="AI model name")
+    openai_model: str = Field(default=None, description="AI model name")
+
+class BenchmarkConfig(BaseModel):
+    """Benchmark Test configuration."""
+    
+    batch_sizes: List[int] = Field(default=[], description="List of different batch sizes to test")
+    test_data_path: str = Field(default=None, description="test data file path")
+    baseline_metrics_path: str = Field(default=None, description="baseline metrics to use for comparison")
+    output_dir: str = Field(default=None, description="directory for test results")
+    iterations: int = Field(default=None, description="number of times to repeat the test")
+    queries_file_path: str = Field(default=None, description="Queries to test data file path")
+
+class StressConfig(BaseModel):
+    """ Stress Test config"""
+
+    batch_size: int = Field(default=None, description="Batch size for insertion")
+    queries_file_path: str = Field(default=None, description="Queries to test data file path")
+    test_data_path: str = Field(default=None, description="test data file path")
+    baseline_metrics_path: str = Field(default=None, description="baseline metrics to use for comparison")
+    output_dir: str = Field(default=None, description="directory for test results")
+    concurrent_users: List[int] = Field(default=[], description="List of different number of concurrent users to test querying")
+    max_concurrent_users: int = Field(default=None, description="Maximum concurrent users")
+    max_data_size: int = Field(default=None, description="Maximum data size used for insertion and querying")
+    data_sizes: List[int] = Field(default=[], description="List of different number of data sizes")
 
 class PaperSenseConfig(BaseSettings):
     """Main configuration model for PaperSense application."""
     
-    MINDSDB_INFRA: MindsDBConfig = Field(default_factory=MindsDBConfig)
-    POSTGRES: PostgresConfig = Field(default_factory=PostgresConfig)
-    KNOWLEDGE_BASE: KnowledgeBaseConfig = Field(default_factory=KnowledgeBaseConfig)
-    AGENT: AgentConfig = Field(default_factory=AgentConfig)
-    APP: AppConfig = Field(default_factory=AppConfig)
-    
-    class Config:
-        """Pydantic configuration."""
-        env_file = '.env'
-        env_file_encoding = 'utf-8'
-        env_nested_delimiter = '__'
-        case_sensitive = True
-        
-        # Allow extra fields for flexibility
-        extra = 'allow'
-
-
-__all__ = [
-    'PaperSenseConfig',
-    'MindsDBConfig',
-    'PostgresConfig', 
-    'KnowledgeBaseConfig',
-    'AgentConfig',
-    'AppConfig',
-    'StorageConfig'
-]
+    mindsdb_infra: MindsDBConfig = Field(default_factory=MindsDBConfig)
+    postgres: PostgresConfig = Field(default_factory=PostgresConfig)
+    knowledge_base: KnowledgeBaseConfig = Field(default_factory=KnowledgeBaseConfig)
+    agent: AgentConfig = Field(default_factory=AgentConfig)
+    app: AppConfig = Field(default_factory=AppConfig)
+    benchmark: BenchmarkConfig = Field(default_factory=BenchmarkConfig)
+    stress: StressConfig = Field(default_factory=StressConfig)

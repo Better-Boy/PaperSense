@@ -19,6 +19,11 @@ function goToHome() {
     window.location.href = '/';
 }
 
+function getArxivId(url){
+    const array = url.trim().split("/");
+    return array[array.length - 1];
+}
+
 function loadPdfFromUrl() {
     const url = document.getElementById('pdf-url').value.trim();
     if (!url) {
@@ -26,14 +31,16 @@ function loadPdfFromUrl() {
         return;
     }
 
+    const exisingArxivId = getArxivId(window.location.href);
+    const newArxivId = getArxivId(url);
+    if(exisingArxivId === newArxivId) return;
+
     // Show loading state
     const viewer = document.getElementById('pdf-viewer');
     viewer.innerHTML = '<div class="pdf-placeholder"><div style="text-align: center;"><div style="margin-bottom: 20px;">📄</div><h3>Loading PDF...</h3><p>Please wait while we fetch the document</p></div></div>';
 
     // Use a CORS proxy for external PDFs
     const proxyUrl = url;
-
-    // const proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(url);
     
     pdfjsLib.getDocument(proxyUrl).promise.then(function(pdf) {
         pdfDoc = pdf;

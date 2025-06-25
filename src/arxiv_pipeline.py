@@ -66,7 +66,7 @@ class ArxivProcessPipeline:
             ArxivProcessingError: If insertion fails
         """
         try:
-            main_kb_name = config.kb.NAME
+            main_kb_name = config.kb.name
             self._knowledge_base.insert(main_kb_name, chunks, MAX_CHUNKS_TO_PROCESS)
             logger.info(f"Added {len(chunks)} chunks to main knowledge base")
         except Exception as e:
@@ -224,8 +224,8 @@ class ArxivProcessPipeline:
 
 
     def _query_postgres(self):
-        logger.info(f"Querying {config.psql.DATABASE}.{config.psql.TABLE_NAME} for {self.arxiv_id}")
-        select_query = f"SELECT * FROM {config.psql.TABLE_NAME} where article_id = '{self.arxiv_id}';"
+        logger.info(f"Querying {config.psql.database}.{config.psql.table_name} for {self.arxiv_id}")
+        select_query = f"SELECT * FROM {config.psql.table_name} where article_id = '{self.arxiv_id}';"
         res = self._postgres_client.execute_query(select_query, {}, True)
         if res: 
             res = dict(res[0])
@@ -233,7 +233,7 @@ class ArxivProcessPipeline:
             return res
         return {}
 
-    def process(self) -> None:
+    def process(self, create_paper_kb: bool, add_to_main_kb: bool) -> None:
         """
         Execute the complete ArXiv paper processing pipeline.
         
@@ -273,18 +273,20 @@ class ArxivProcessPipeline:
                 # Step 6: Store in PostgreSQL
                 self._store_in_postgres(full_text, metadata)
 
-            full_text = utils.escape_text(full_text)
-            # Step 4: Process and chunk text
-            chunks = self._process_and_chunk_text(full_text, metadata)
+            if create_paper_kb or add_to_main_kb:
+                full_text = utils.escape_text(full_text)
+                # Step 4: Process and chunk text
+                chunks = self._process_and_chunk_text(full_text, metadata)
 
-            if not existing_paper_data:
+            if not existing_paper_data and add_to_main_kb:
                 # Step 5: Store in main knowledge base
                 self.add_to_main_knowledge_base(chunks)
             
             # Step 7: Create and populate paper-specific knowledge base
-            self.create_paper_knowledge_base()
-            self._store_in_paper_kb(chunks)
-            self.create_index_on_kb()
+            if create_paper_kb:
+                self.create_paper_knowledge_base()
+                self._store_in_paper_kb(chunks)
+                self.create_index_on_kb()
             
             logger.info(f"Successfully completed processing for ArXiv ID: {self.arxiv_id}")
             
@@ -295,17 +297,3 @@ class ArxivProcessPipeline:
             logger.error(f"Unexpected error processing ArXiv ID {self.arxiv_id}: {e}")
             raise ArxivProcessingError(f"Unexpected error in processing pipeline: {e}") from e
 
-    # Deprecated method - kept for backward compatibility
-    def start(self) -> None:
-        """
-        Legacy method for starting the pipeline.
-        
-        Deprecated: Use process() instead.
-        """
-        import warnings
-        warnings.warn(
-            "start() is deprecated, use process() instead",
-            DeprecationWarning,
-            stacklevel=2
-        )
-        self.process()

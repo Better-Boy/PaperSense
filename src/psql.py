@@ -93,11 +93,11 @@ class PostgresHandler:
             Dictionary of connection parameters.
         """
         return {
-            "host": config.psql.HOST,
-            "port": config.psql.PORT,
-            "dbname": config.psql.DATABASE,
-            "user": config.psql.USER,
-            "password": config.psql.PASSWORD,
+            "host": config.psql.host,
+            "port": config.psql.port,
+            "dbname": config.psql.database,
+            "user": config.psql.user,
+            "password": config.psql.password,
             "connect_timeout": 10
         }
     
@@ -197,7 +197,7 @@ class PostgresHandler:
             raise ValueError(f"Missing required fields: {missing_fields}")
         
         # Get table name from config, with fallback
-        table_name = getattr(config.psql, 'TABLE_NAME', 'articles')
+        table_name = getattr(config.psql, 'table_name', 'articles')
         
         insert_query = f"""
             INSERT INTO {table_name} (

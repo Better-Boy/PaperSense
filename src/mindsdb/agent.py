@@ -5,7 +5,7 @@ with MindsDB agents through a high-level interface.
 """
 
 import logging
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
 
 from .mdb_server import MDBServer
 from .. import utils

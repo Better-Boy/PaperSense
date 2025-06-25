@@ -1,13 +1,13 @@
-MINDSDB_INFRA:
-  MINDSDB_HOST: 127.0.0.1
-  MINDSDB_PORT: 47334
+mindsdb_infra:
+  host: 127.0.0.1
+  port: 47334
 
-KNOWLEDGE_BASE:
-  NAME: arxiv_kb
-  EMBEDDING_MODEL: text-embedding-3-small
-  RERANKING_MODEL: gpt-4o
-  OPENAI_API_KEY: <sk-proj>
-  METADATA_COLUMNS:
+knowledge_base:
+  name: test_kb
+  embedding_model: text-embedding-3-small
+  reranking_model: gpt-4o
+  openai_api_key: <sk-proj>
+  metadata_columns:
     - authors
     - categories
     - published_year
@@ -15,26 +15,45 @@ KNOWLEDGE_BASE:
     - article_id
     - title
     - summary
-  STORAGE:
-    ENABLE_PG_VECTOR: False
-    PG_VECTOR_DATABASE: pgvec_db
-    PG_VECTOR_TABLE: vec_table
-  CONTENT_COLUMNS:
+  storage:
+    enable_pg_vector: False
+    pg_vector_database: pgvec_db
+    pg_vector_table: vec_table
+  content_columns:
     - text
 
-POSTGRES:
-  HOST: localhost
-  PORT: 5432
-  DATABASE: arxiv_psql_db
-  USER: postgres
-  PASSWORD: postgres
-  TABLE_NAME: arxiv_txt
+postgres:
+  host: localhost
+  port: 5432
+  database: arxiv_psql_db
+  user: postgres
+  password: postgres
+  table_name: arxiv_txt
 
-AGENT:
-  OPENAI_MODEL: gpt-4o
+agent:
+  openai_model: gpt-4o
 
-APP:
-  LOG_LEVEL: INFO
-  LOG_FORMAT: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-  LOAD_SAMPLE_DATA: False
-  SAMPLE_DATA_COUNT: 50
+app:
+  log_level: INFO
+  log_format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  load_sample_data: True
+  sample_data_count: 5
+
+benchmark:
+  batch_sizes: [10, 20]
+  test_data_path: /home/abhi/refactored/data/data.json
+  queries_file_path: /home/abhi/refactored/data/queries.json
+  baseline_metrics_path: ""
+  output_dir: test_reports
+  iterations: 1
+
+stress:
+  batch_size: 50
+  test_data_path: /home/abhi/refactored/data/data.json
+  queries_file_path: /home/abhi/refactored/data/queries.json
+  baseline_metrics_path: ""
+  output_dir: test_reports
+  concurrent_users: [1, 2, 3]
+  max_concurrent_users: 5
+  max_data_size: 10
+  data_sizes: [3, 6, 9]

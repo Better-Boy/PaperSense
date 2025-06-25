@@ -1,6 +1,7 @@
 """Chat-related Pydantic models."""
 
 from pydantic import BaseModel, Field, validator
+from typing import Optional
 
 
 class ChatRequest(BaseModel):

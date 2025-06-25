@@ -1,7 +1,7 @@
 """MindsDB server connection and query execution module."""
 
 import logging
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional, Union
 
 import mindsdb_sdk
 import requests
@@ -45,8 +45,8 @@ class MDBServer:
         Raises:
             MDBConnectionError: If connection configuration is missing or invalid.
         """
-        host = config.mdb_infra.MINDSDB_HOST
-        port = config.mdb_infra.MINDSDB_PORT
+        host = config.mdb_infra.host
+        port = config.mdb_infra.port
 
         if not host or not port:
             raise MDBConnectionError(

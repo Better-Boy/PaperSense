@@ -24,8 +24,8 @@ os.makedirs('logs', exist_ok=True)
 
 # Configure logging
 logging.basicConfig(
-    level=config.app.LOG_LEVEL,
-    format=config.app.LOG_FORMAT,
+    level=config.app.log_level,
+    format=config.app.log_format,
     handlers=[
         logging.FileHandler('logs/app.log'),
         logging.StreamHandler()
@@ -236,7 +236,7 @@ async def search_papers(
         logger.info(f"Searching papers with query: '{query}', filters: {filters}")
         
         # Perform search
-        raw_results = _kb.search(query, filters)
+        raw_results = _kb.search(config.kb.name, query, filters)
         
         # Convert to PaperResult models
         paper_results = _convert_to_paper_results(raw_results if raw_results else [])
@@ -304,7 +304,7 @@ async def get_chat_ui(
             try:
                 # Process paper through pipeline
                 arxiv_pipe = arxiv_pipeline.ArxivProcessPipeline(arxiv_id, _kb, _psql)
-                arxiv_pipe.start()
+                arxiv_pipe.process(create_paper_kb=True, add_to_main_kb=True)
                 
                 # Create agent
                 _agent.create(paper_agent_name, [paper_kb_name], [])

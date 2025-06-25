@@ -60,7 +60,6 @@ def build_values_clause(records: List[Dict[str, Any]], columns: List[str]) -> st
     for i, record in enumerate(records):
         logger.debug(f"Processing record {i+1}/{len(records)}")
         escaped_values = []
-        
         for col in columns:
             # Properly escape SQL values and handle None values
             value = record[col]
@@ -182,20 +181,20 @@ def build_create_kb_query(name: str) -> str:
     logger.info(f"Building CREATE KNOWLEDGE_BASE query for '{name}'")
     
     try:
-        metadata_cols = ', '.join([f"'{col}'" for col in config.kb.METADATA_COLUMNS])
-        content_cols = ', '.join([f"'{col}'" for col in config.kb.CONTENT_COLUMNS])
+        metadata_cols = ', '.join([f"'{col}'" for col in config.kb.metadata_columns])
+        content_cols = ', '.join([f"'{col}'" for col in config.kb.content_columns])
         
-        logger.debug(f"Metadata columns: {config.kb.METADATA_COLUMNS}")
-        logger.debug(f"Content columns: {config.kb.CONTENT_COLUMNS}")
-        logger.debug(f"Using embedding model: {config.kb.EMBEDDING_MODEL}")
-        logger.debug(f"Using reranking model: {config.kb.RERANKING_MODEL}")
+        logger.debug(f"Metadata columns: {config.kb.metadata_columns}")
+        logger.debug(f"Content columns: {config.kb.content_columns}")
+        logger.debug(f"Using embedding model: {config.kb.embedding_model}")
+        logger.debug(f"Using reranking model: {config.kb.reranking_model}")
         
         storage = ""
-        if config.kb_storage.ENABLE_PG_VECTOR:
-            pg_vec_table = config.kb_storage.PG_VECTOR_TABLE
-            if name != config.kb.NAME:
+        if config.kb_storage.enable_pg_vector:
+            pg_vec_table = config.kb_storage.pg_vector_table
+            if name != config.kb.name:
                 pg_vec_table = f"vec_table_{name.replace("_kb", "")}"
-            storage = f"storage = {config.kb_storage.PG_VECTOR_DATABASE}.{pg_vec_table},"
+            storage = f"storage = {config.kb_storage.pg_vector_database}.{pg_vec_table},"
         
         query = f"""
             CREATE KNOWLEDGE_BASE IF NOT EXISTS {name}
@@ -203,13 +202,13 @@ def build_create_kb_query(name: str) -> str:
                 {storage}
                 embedding_model = {{
                     "provider": "openai",
-                    "model_name": "{config.kb.EMBEDDING_MODEL}",
-                    "api_key": "{config.kb.OPENAI_API_KEY}"
+                    "model_name": "{config.kb.embedding_model}",
+                    "api_key": "{config.kb.openai_api_key}"
                 }},
                 reranking_model = {{
                     "provider": "openai", 
-                    "model_name": "{config.kb.RERANKING_MODEL}",
-                    "api_key": "{config.kb.OPENAI_API_KEY}"
+                    "model_name": "{config.kb.reranking_model}",
+                    "api_key": "{config.kb.openai_api_key}"
                 }},
                 content_columns = [{content_cols}],
                 metadata_columns = [{metadata_cols}];
@@ -301,6 +300,7 @@ def add_metadata_to_chunks(
 
 
 def build_search_query(
+    name: str,
     query: str, 
     metadata: Optional[Dict[str, Any]] = None, 
     limit: int = 10, 
@@ -332,7 +332,7 @@ def build_search_query(
     
     # Escape single quotes in query
     escaped_query = query.replace("'", "''")
-    search_query = f"SELECT * from {config.kb.NAME} where content = '{escaped_query}'"
+    search_query = f"SELECT * from {name} where content = '{escaped_query}'"
     
     if metadata:
         search_query += " AND "
@@ -497,8 +497,8 @@ def build_create_agent_query(name: str, knowledge_bases: List[str], tables: List
     query = f"""
     CREATE AGENT IF NOT EXISTS {name}
     USING
-        model = '{config.agent.OPENAI_MODEL}',
-        openai_api_key = '{config.kb.OPENAI_API_KEY}',
+        model = '{config.agent.openai_model}',
+        openai_api_key = '{config.kb.openai_api_key}',
         include_knowledge_bases= [{kb_list}],
         include_tables=[{table_list}],
         prompt_template='

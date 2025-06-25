@@ -1,0 +1,14 @@
+[
+    {
+        "type": "simple_search",
+        "query": "What is machine learning?"
+    },
+    {
+        "type": "complex_semantic", 
+        "query": "Explain the relationship between artificial intelligence and data science"
+    },
+    {
+        "type": "factual_lookup",
+        "query": "What are the key benefits of neural networks?"
+    }
+]

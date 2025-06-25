@@ -35,7 +35,7 @@ class KnowledgeBase:
         self.conn.execute_query(create_kb_query)
 
     def create_index(self, name: str) -> None:
-        if config.kb_storage.ENABLE_PG_VECTOR:
+        if config.kb_storage.enable_pg_vector:
             logger.info(f"Creating index for knowledge base - {name}")
             create_index_kb_query = f"CREATE INDEX ON KNOWLEDGE_BASE {name};"
             self.conn.execute_query(create_index_kb_query)
@@ -54,7 +54,7 @@ class KnowledgeBase:
             logger.error("Failed to list knowledge bases: %s", e)
             return []
 
-    def _insert_batch(self, name: str, batch_data: List[Dict[str, Any]]) -> bool:
+    def insert_batch(self, name: str, batch_data: List[Dict[str, Any]]) -> bool:
         """Insert a batch of data into the knowledge base.
         
         Args:
@@ -65,24 +65,15 @@ class KnowledgeBase:
             True if insertion successful, False otherwise
         """
         max_retries = 3
-        columns = set(config.kb.CONTENT_COLUMNS + config.kb.METADATA_COLUMNS)
+        columns = set(config.kb.content_columns + config.kb.metadata_columns)
         values_clause = utils.build_values_clause(batch_data, columns)
         query = utils.build_insert_query(name, columns, values_clause)
-        
-        for attempt in range(max_retries):
-            try:
-                self.conn.execute_query(query)
-                return True
-            except Exception as e:
-                logger.warning(
-                    "Insert attempt %d/%d failed for batch in %s: %s",
-                    attempt + 1, max_retries, name, e
-                )
-                if attempt < max_retries - 1:
-                    time.sleep(1)
-        
-        logger.error("All insert attempts failed for batch in %s", name)
-        return False
+        try:
+            self.conn.execute_query(query)
+            return True
+        except Exception as e:
+            logger.error("Failed to insert batch: %s", e)
+            return False
 
     def insert(
         self, 
@@ -113,7 +104,7 @@ class KnowledgeBase:
         
         for i in range(0, len(data), batch_size):
             batch = data[i:i + batch_size]
-            if self._insert_batch(name, batch):
+            if self.insert_batch(name, batch):
                 successful_batches += 1
             else:
                 logger.error("Failed to insert batch %d/%d", i // batch_size + 1, total_batches)
@@ -165,6 +156,7 @@ class KnowledgeBase:
 
     def search(
         self, 
+        name: str,
         query: str, 
         metadata: Dict[str, Any], 
         limit: int = 10, 
@@ -183,10 +175,10 @@ class KnowledgeBase:
         """
         try:
             search_query = utils.build_search_query(
-                query, metadata, limit, relevance_threshold
+                name, query, metadata, limit, relevance_threshold
             )
             results = self.conn.execute_query(search_query)
-            
+
             if results is None:
                 return []
             
