@@ -1,7 +1,6 @@
 """Knowledge base management module for MDB operations."""
 
 import logging
-import time
 from typing import Any, Dict, List, Optional
 
 from .. import config_loader as config, utils

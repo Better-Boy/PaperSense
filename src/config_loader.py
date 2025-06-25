@@ -7,12 +7,7 @@ from pathlib import Path
 from typing import Dict, Any, Optional
 
 from .models.config import (
-    PaperSenseConfig,
-    MindsDBConfig,
-    PostgresConfig,
-    KnowledgeBaseConfig,
-    AgentConfig,
-    AppConfig
+    PaperSenseConfig
 )
 
 # Configure logger for this module

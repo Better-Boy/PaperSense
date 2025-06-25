@@ -1,7 +1,6 @@
 """Chat-related Pydantic models."""
 
-from pydantic import BaseModel, Field, validator
-from typing import Optional
+from pydantic import BaseModel, Field, field_validator
 
 
 class ChatRequest(BaseModel):
@@ -23,7 +22,7 @@ class ChatRequest(BaseModel):
         example="What is the main contribution of this paper?"
     )
 
-    @validator('arxiv_id')
+    @field_validator('arxiv_id')
     def validate_arxiv_id(cls, value: str) -> str:
         """Validate and clean ArXiv ID format.
         
@@ -47,7 +46,7 @@ class ChatRequest(BaseModel):
             
         return cleaned_id
 
-    @validator('query')
+    @field_validator('query')
     def validate_query(cls, value: str) -> str:
         """Validate and clean query string.
         

@@ -4,7 +4,6 @@ from typing import List, Dict, Any
 import psutil
 import json
 
-from dataclasses import asdict
 from pathlib import Path
 from rich.console import Console
 from rich.panel import Panel
