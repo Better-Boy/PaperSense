@@ -48,7 +48,7 @@ There are 2 ways to install.
 
 ## High Level Architecture
 
-![architecture](assests/architecture.svg)
+![architecture](assests/Papersense.svg)
 
 #### Manual Installation
 
