@@ -127,9 +127,6 @@ Refer [checklist](assests/checklist.md)
 
 ### 🙏 Acknowledgments
 
-```markdown
-
 - [arXiv.org](https://arxiv.org/)
 - [OpenAI](https://openai.com/)
 - [MindsDB](https://mindsdb.com/)
-```
