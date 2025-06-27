@@ -13,7 +13,7 @@
             <div class="logo">
                 <img src="https://cdn-icons-png.flaticon.com/512/2541/2541988.png" alt="PaperSense Logo" class="logo-icon"> PaperSense
             </div>
-            <div class="subtitle">Semantic search for academic papers</div>
+            <div class="subtitle">Search smarter, Discover deeper</div>
             
             <div class="search-container">
                 <input type="text" class="search-box" placeholder="Search papers by topic, author, or concept...">
@@ -36,6 +36,11 @@
                     <option value="2023">2023</option>
                 </select>
             </div>
+            <div class="arxiv-container">
+                <button class="arxiv-btn" id="arxiv-btn" title="Open arXiv paper directly">
+                    <i class="fas fa-solid fa-comments"></i> Chat with Paper
+                </button>
+            </div>
         </div>
 
         <div class="loading-spinner" id="loading">
@@ -51,6 +56,28 @@
 
         <div class="footer">
             <p>Powered by <a href="https://arxiv.org/">arXiv</a>, <a href="https://mindsdb.com/">MindsDB</a> and <a href="https://openai.com/">OpenAI</a></p>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="arxiv-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title"><i class="fas fa-comments"></i>
+                Chat with Paper</div>
+                <div class="modal-subtitle">Enter the arXiv ID to open the chat</div>
+            </div>
+            <input 
+                type="text" 
+                class="modal-input" 
+                id="arxiv-input" 
+                placeholder="e.g., 2506.00839"
+                autocomplete="off"
+            >
+            <div class="error-message" id="arxiv-error">Invalid arXiv ID format. Please enter a valid ID like "2506.00839" or "2506.00821"</div>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-cancel" id="modal-cancel">Cancel</button>
+                <button class="modal-btn modal-btn-submit" id="modal-submit">Open Paper</button>
+            </div>
         </div>
     </div>
 

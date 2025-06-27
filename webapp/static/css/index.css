@@ -142,6 +142,29 @@ body {
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
+.arxiv-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.arxiv-btn {
+    padding: 10px 20px;
+    color: black;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+    background: white;
+    border: 1px solid #e2e8f0;
+}
+
+.arxiv-btn:hover {
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
 .results-container {
     background: white;
     border-radius: 20px;
@@ -292,6 +315,112 @@ body {
     height: 40px;
     animation: spin 1s linear infinite;
     margin: 0 auto;
+}
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-overlay.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    animation: modalSlideIn 0.3s ease forwards;
+}
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.modal-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin-bottom: 8px;
+}
+
+.modal-subtitle {
+    color: #718096;
+    font-size: 0.9rem;
+}
+
+.modal-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.modal-input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.error-message {
+    display: none; 
+    color: #e53e3e; 
+    font-size: 0.85rem; 
+    margin-bottom: 15px; 
+    text-align: center;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.modal-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-btn-cancel {
+    background: #f7fafc;
+    color: #4a5568;
+    border: 1px solid #e2e8f0;
+}
+
+.modal-btn-cancel:hover {
+    background: #edf2f7;
+}
+
+.modal-btn-submit {
+    background: #667eea;
+    color: white;
+}
+
+.modal-btn-submit:hover {
+    background: #5a67d8;
+    transform: translateY(-1px);
 }
 
 @keyframes spin {

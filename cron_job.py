@@ -26,15 +26,19 @@ LOG_FILE_PATH = "cron_arxiv_processor.log"
 
 # Configure logging
 logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=config_loader.app.log_level,
+    format=config_loader.app.log_format,
     handlers=[
-        logging.FileHandler(LOG_FILE_PATH),
-        logging.StreamHandler(sys.stdout)
+        logging.FileHandler('logs/cron.log'),
+        logging.StreamHandler()
     ]
 )
+
 logger = logging.getLogger(__name__)
 
+mdb = mdb_server.MDBServer()
+psql_client = psql.PostgresHandler()
+kb = knowledge_base.KnowledgeBase(mdb)
 
 def download_new_arxiv_ids() -> None:
     """
@@ -118,13 +122,6 @@ def process_new_arxiv_ids() -> None:
             logger.warning("No papers to process")
             return
         
-        logger.info("Initializing database connections and knowledge base")
-        
-        # Initialize services
-        mdb = mdb_server.MDBServer()
-        psql_client = psql.PostgresHandler()
-        kb = knowledge_base.KnowledgeBase(mdb)
-        
         logger.info(f"Starting processing of {len(papers_metadata)} papers")
         
         processed_count = 0
@@ -189,6 +186,36 @@ def remove_file() -> None:
         logger.error(f"Failed to remove metadata file: {e}")
 
 
+def create_mdb_job():
+    try:
+        job_name = "paperspace_cron"
+        if job_name not in mdb.client.jobs.list():
+            columns = ", ".join(set(config_loader.kb.content_columns + config_loader.kb.metadata_columns))
+            job_query = f"""
+                INSERT INTO {config_loader.kb.name} (
+                    {columns}
+                    ) 
+                    SELECT 
+                    {columns}
+                    FROM 
+                    (
+                        SELECT 
+                        * 
+                        FROM 
+                        {config_loader.psql.database}.public.{config_loader.psql.table_name} 
+                        WHERE 
+                        id > LAST
+                );
+            """
+            interval = "1 day"
+            logger.info(f"{job_name} not found. Creating a new job with query - {job_query} and interval = {interval}")
+            mdb.client.jobs.create(name=job_name, query_str=job_query, repeat_str=interval)
+            logger.info(f"{job_name} job created successfully")
+    except Exception as e:
+        logger.error(f"Failed to create a job: {e}")
+        raise
+
+
 def main() -> None:
     """
     Main execution function that orchestrates the entire pipeline.
@@ -199,6 +226,9 @@ def main() -> None:
     logger.info("Starting ArXiv processing pipeline")
     
     try:
+        # Create a job if not exists
+        create_mdb_job()
+
         # Download new ArXiv papers
         download_new_arxiv_ids()
         

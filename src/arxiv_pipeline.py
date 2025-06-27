@@ -173,7 +173,7 @@ class ArxivProcessPipeline:
         Returns:
             List of text chunks with metadata
         """
-        chunks = utils.chunk_text(full_text, 2000, 300)
+        chunks = utils.chunk_text(full_text, 1500, 300)
         
         # Add metadata to each chunk
         for chunk in chunks:

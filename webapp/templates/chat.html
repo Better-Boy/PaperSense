@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PaperSense</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/5.1.1/marked.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{ url_for('static', path='css/chat.css') }}">
 </head>
@@ -19,10 +20,6 @@
                 <img src="https://cdn-icons-png.flaticon.com/512/2541/2541988.png" alt="PaperSense Logo" class="logo-icon">
                 <span>PaperSense</span>
             </div>
-        </div>
-        <div class="url-input">
-            <input type="text" id="pdf-url" placeholder="Enter PDF URL (e.g., https://arxiv.org/pdf/2501.00089)" value="{{ arxiv_link }}">
-            <button class="load-btn" onclick="loadPdfFromUrl()">Load PDF</button>
         </div>
     </div>
 

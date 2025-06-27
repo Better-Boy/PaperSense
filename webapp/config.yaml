@@ -4,7 +4,7 @@ mindsdb_infra:
 
 knowledge_base:
   name: test_kb
-  embedding_model: text-embedding-3-small
+  embedding_model: text-embedding-ada-002
   reranking_model: gpt-4o
   openai_api_key: <sk-proj>
   metadata_columns:
@@ -16,7 +16,7 @@ knowledge_base:
     - title
     - summary
   storage:
-    enable_pg_vector: True
+    enable_pg_vector: False
     pg_vector_database: pgvec_db
     pg_vector_table: vec_table
   content_columns:

@@ -20,20 +20,13 @@ function goToHome() {
 }
 
 function getArxivId(url){
-    const array = url.trim().split("/");
+    const array = url.trim().split("=");
     return array[array.length - 1];
 }
 
 function loadPdfFromUrl() {
-    const url = document.getElementById('pdf-url').value.trim();
-    if (!url) {
-        alert('Please enter a PDF URL');
-        return;
-    }
-
-    const exisingArxivId = getArxivId(window.location.href);
-    const newArxivId = getArxivId(url);
-    if(exisingArxivId === newArxivId) return;
+    const arxivId = getArxivId(window.location.href);
+    const url = `https://arxiv.org/pdf/${arxivId}`;
 
     // Show loading state
     const viewer = document.getElementById('pdf-viewer');
@@ -60,13 +53,6 @@ function loadPdfFromUrl() {
 // Load default PDF on page load
 window.addEventListener('load', function() {
     loadPdfFromUrl();
-});
-
-// Allow loading PDF with Enter key
-document.getElementById('pdf-url').addEventListener('keypress', function(event) {
-    if (event.key === 'Enter') {
-        loadPdfFromUrl();
-    }
 });
 
 // Render a page
@@ -186,14 +172,14 @@ async function handleUserMessage(text) {
     
     // Add loading message
     const loadingMessage = addMessage('assistant', '', true);
-    const array = document.getElementById('pdf-url').value.trim().split("/");
+    const arxivId = getArxivId(window.location.href);
     try {
         
         // Make API call
         const response = await fetch('/api/chat', {
             method: 'POST',
             body: JSON.stringify({
-                arxiv_id: array[array.length - 1],
+                arxiv_id: arxivId,
                 query: text
             })
         });
@@ -207,8 +193,8 @@ async function handleUserMessage(text) {
 
         const data = await response.json();
         const aiResponse = data.response;
-        
-        addMessage('assistant', aiResponse);
+        const parsed_response = marked.parse(aiResponse);
+        addMessage('assistant', parsed_response);
         
     } catch (error) {
         console.error('API Error:', error);

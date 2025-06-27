@@ -140,3 +140,71 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+document.getElementById('arxiv-btn').addEventListener('click', () => {
+    const modal = document.getElementById('arxiv-modal');
+    const input = document.getElementById('arxiv-input');
+    const errorElement = document.getElementById('arxiv-error');
+    
+    modal.classList.add('show');
+    input.value = '';
+    errorElement.style.display = 'none';
+    setTimeout(() => input.focus(), 100);
+});
+
+// Modal cancel button
+document.getElementById('modal-cancel').addEventListener('click', () => {
+    document.getElementById('arxiv-modal').classList.remove('show');
+});
+
+// Modal submit button
+document.getElementById('modal-submit').addEventListener('click', () => {
+    const arxivId = document.getElementById('arxiv-input').value;
+    const errorElement = document.getElementById('arxiv-error');
+    
+    // Hide error message first
+    errorElement.style.display = 'none';
+    
+    if (arxivId && arxivId.trim()) {
+        // Clean the input - remove any spaces and common prefixes
+        let cleanId = arxivId.trim().replace(/^(arxiv:|arXiv:)/i, '');
+        
+        // Validate basic format (numbers, dots, letters)
+        if (/^[\d.]+[a-z]*$/i.test(cleanId)) {
+            // Open arXiv link in new tab
+            const chatUrl = `/api/chat-ui?query=${cleanId}`;
+            window.open(chatUrl, '_blank', 'noopener,noreferrer');
+            
+            // Close modal
+            document.getElementById('arxiv-modal').classList.remove('show');
+        } else {
+            errorElement.style.display = 'block';
+        }
+    }
+});
+
+// Close modal when clicking overlay
+document.getElementById('arxiv-modal').addEventListener('click', (e) => {
+    if (e.target.id === 'arxiv-modal') {
+        document.getElementById('arxiv-modal').classList.remove('show');
+    }
+});
+
+// Handle input changes to hide error message
+document.getElementById('arxiv-input').addEventListener('input', () => {
+    document.getElementById('arxiv-error').style.display = 'none';
+});
+
+// Handle Enter key in modal input
+document.getElementById('arxiv-input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        document.getElementById('modal-submit').click();
+    }
+});
+
+// Handle Escape key to close modal
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        document.getElementById('arxiv-modal').classList.remove('show');
+    }
+});

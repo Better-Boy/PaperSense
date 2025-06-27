@@ -293,7 +293,6 @@ async def get_chat_ui(
         logger.info(f"Setting up chat UI for paper: {arxiv_id}")
         
         # Generate names and URLs
-        arxiv_paper_link = f"https://arxiv.org/pdf/{arxiv_id}"
         paper_agent_name = utils.generate_agent_name(arxiv_id)
         paper_kb_name = utils.generate_kb_name(arxiv_id)
         
@@ -322,8 +321,7 @@ async def get_chat_ui(
         return templates.TemplateResponse(
             "chat.html",
             {
-                "request": request,
-                "arxiv_link": arxiv_paper_link
+                "request": request
             }
         )
         

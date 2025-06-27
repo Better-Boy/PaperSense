@@ -63,7 +63,6 @@ class KnowledgeBase:
         Returns:
             True if insertion successful, False otherwise
         """
-        max_retries = 3
         columns = set(config.kb.content_columns + config.kb.metadata_columns)
         values_clause = utils.build_values_clause(batch_data, columns)
         query = utils.build_insert_query(name, columns, values_clause)

@@ -68,6 +68,7 @@ services:
       POSTGRES_PASSWORD: postgres
       MINDSDB_HOST: mindsdb
       MINDSDB_PORT: 47334
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
 
 volumes:
   postgres_data:
