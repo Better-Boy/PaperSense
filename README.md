@@ -46,6 +46,10 @@ Whether you're a researcher, student, or curious mind, PaperSense helps you expl
 
 There are 2 ways to install.
 
+## High Level Architecture
+
+![architecture](assests/architecture.svg)
+
 #### Manual Installation
 
 1. Clone the repository
@@ -101,6 +105,7 @@ These settings are important for running and testing the app.
 - Config driven
 - Benchmark and Stress testing
 - Detailed documentation in README
+- [ruff](https://github.com/astral-sh/ruff) linting and formatting
 
 ## Testing
 
