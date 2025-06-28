@@ -36,24 +36,24 @@ app:
   log_level: INFO
   log_format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
   load_sample_data: True
-  sample_data_count: 10
+  sample_data_count: 20
   openai_api_key: <sk-proj>
 
 benchmark:
   batch_sizes: [10]
   data_sizes: [1000]
-  test_data_path: /home/abhi/latest/PaperSense/data/new_data.json
-  queries_file_path: /home/abhi/latest/PaperSense/data/queries.json
-  baseline_metrics_path: /home/abhi/latest/PaperSense/data/baseline.json
+  test_data_path: ../data/new_data.json
+  queries_file_path: ../data/queries.json
+  baseline_metrics_path: ../data/baseline.json
   output_dir: test_reports
   use_continuous_monitoring: True
   resource_sample_rate: 0.1
 
 stress:
   batch_size: 50
-  test_data_path: /home/abhi/latest/PaperSense/data/new_data.json
-  queries_file_path: /home/abhi/latest/PaperSense/data/queries.json
-  baseline_metrics_path: /home/abhi/latest/PaperSense/data/baseline.json
+  test_data_path: ../data/new_data.json
+  queries_file_path: ../data/queries.json
+  baseline_metrics_path: ../data/baseline.json
   output_dir: test_reports
   concurrent_users: [3]
   data_sizes: [1500]
