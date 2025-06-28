@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PaperSense</title>
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2541/2541988.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/5.1.1/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ url_for('static', path='css/chat.css') }}">
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <button class="back-btn" onclick="goToHome()">
+                <span>←</span>
+                <span>Home</span>
+            </button>
+            <div class="logo">
+                <img src="https://cdn-icons-png.flaticon.com/512/2541/2541988.png" alt="PaperSense Logo" class="logo-icon">
+                <span>PaperSense</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <!-- PDF Section -->
+        <div class="pdf-section">
+            <div class="pdf-controls" id="pdf-controls" style="display: none;">
+                <button class="control-btn" onclick="previousPage()">← Previous</button>
+                <span class="page-info" id="page-info">Page 1 of 1</span>
+                <button class="control-btn" onclick="nextPage()">Next →</button>
+                <button class="control-btn" onclick="zoomOut()">Zoom Out</button>
+                <button class="control-btn" onclick="zoomIn()">Zoom In</button>
+            </div>
+            <div class="pdf-viewer" id="pdf-viewer">
+                <div class="pdf-placeholder">
+                    <svg fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
+                    </svg>
+                    <h3>No PDF loaded</h3>
+                    <p>Enter a PDF URL above to start analyzing</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Section -->
+        <div class="chat-section">
+            <div class="chat-header">
+                <div class="chat-title">AI Assistant</div>
+                <div class="chat-subtitle">Ask questions about your PDF document</div>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="welcome-message">
+                    👋 Welcome to Papersense! Enter a PDF URL above to start our conversation.
+                </div>
+            </div>
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" id="chat-input" placeholder="Ask me anything about the PDF..." onkeypress="handleEnter(event)">
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', path='js/chat.js') }}"></script>
+</body>
+</html>

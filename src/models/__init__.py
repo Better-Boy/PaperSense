@@ -12,17 +12,17 @@ from .config import (
     MindsDBConfig,
     PostgresConfig,
     KnowledgeBaseConfig,
-    AgentConfig
+    AgentConfig,
 )
 
 __all__ = [
     "ChatRequest",
-    "ChatResponse", 
+    "ChatResponse",
     "SearchResponse",
     "ErrorResponse",
-    'PaperSenseConfig',
-    'MindsDBConfig',
-    'PostgresConfig',
-    'KnowledgeBaseConfig',
-    'AgentConfig'
+    "PaperSenseConfig",
+    "MindsDBConfig",
+    "PostgresConfig",
+    "KnowledgeBaseConfig",
+    "AgentConfig",
 ]

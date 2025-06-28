@@ -1,0 +1,61 @@
+mindsdb_infra:
+  host: 127.0.0.1
+  port: 47334
+
+knowledge_base:
+  name: arxiv_kb
+  embedding_model: text-embedding-3-small
+  reranking_model: gpt-4o
+  metadata_columns:
+    - authors
+    - categories
+    - published_year
+    - primary_category
+    - article_id
+    - title
+    - abstract
+  storage:
+    enable_pg_vector: False
+    pg_vector_database: pgvec_db
+    pg_vector_table: vec_table
+  content_columns:
+    - text
+
+postgres:
+  host: localhost
+  port: 5432
+  database: arxiv_psql_db
+  user: postgres
+  password: postgres
+  table_name: arxiv_txt
+
+agent:
+  openai_model: gpt-4o
+
+app:
+  log_level: INFO
+  log_format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  load_sample_data: False
+  sample_data_count: 10
+  openai_api_key: <sk-proj>
+
+benchmark:
+  batch_sizes: [10]
+  data_sizes: [1000]
+  test_data_path: /home/abhi/latest/PaperSense/data/new_data.json
+  queries_file_path: /home/abhi/latest/PaperSense/data/queries.json
+  baseline_metrics_path: /home/abhi/latest/PaperSense/data/baseline.json
+  output_dir: test_reports
+  use_continuous_monitoring: True
+  resource_sample_rate: 0.1
+
+stress:
+  batch_size: 50
+  test_data_path: /home/abhi/latest/PaperSense/data/new_data.json
+  queries_file_path: /home/abhi/latest/PaperSense/data/queries.json
+  baseline_metrics_path: /home/abhi/latest/PaperSense/data/baseline.json
+  output_dir: test_reports
+  concurrent_users: [3]
+  data_sizes: [1500]
+  use_continuous_monitoring: True
+  resource_sample_rate: 0.1

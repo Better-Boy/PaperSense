@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/5.1.1/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>PaperSense</title>
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2541/2541988.png">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/index.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="https://cdn-icons-png.flaticon.com/512/2541/2541988.png" alt="PaperSense Logo" class="logo-icon"> PaperSense
+            </div>
+            <div class="subtitle">Search smarter, Discover deeper</div>
+            
+            <div class="search-container">
+                <input type="text" class="search-box" placeholder="Search papers by topic, author, or concept...">
+                <button class="search-btn">
+                        <i class="fas fa-magnifying-glass search-icon"></i> </button>
+                </button>
+            </div>
+            
+            <div class="filters">
+                <select class="filter-dropdown" id="field">
+                    <option value="">All Fields</option>
+                    <option value="cs">Computer Science</option>
+                    <option value="physics">Physics</option>
+                    <option value="economics">Economics</option>
+                </select>
+                <select class="filter-dropdown" id="year">
+                    <option value="">Year</option>
+                    <option value="2025">2025</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                </select>
+            </div>
+            <div class="arxiv-container">
+                <button class="arxiv-btn" id="arxiv-btn" title="Open arXiv paper directly">
+                    <i class="fas fa-solid fa-comments"></i> Chat with Paper
+                </button>
+            </div>
+        </div>
+
+        <div class="loading-spinner" id="loading">
+            <div class="spinner"></div>
+            <p style="color: #718096; margin-top: 15px;">Searching papers...</p>
+        </div>
+
+        <div class="results-container" id="results">
+            <div class="results-header">
+                <div class="results-count"></div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Powered by <a href="https://arxiv.org/">arXiv</a>, <a href="https://mindsdb.com/">MindsDB</a> and <a href="https://openai.com/">OpenAI</a></p>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="arxiv-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title"><i class="fas fa-comments"></i>
+                Chat with Paper</div>
+                <div class="modal-subtitle">Enter the arXiv ID to open the chat</div>
+            </div>
+            <input 
+                type="text" 
+                class="modal-input" 
+                id="arxiv-input" 
+                placeholder="e.g., 2506.00839"
+                autocomplete="off"
+            >
+            <div class="error-message" id="arxiv-error">Invalid arXiv ID format. Please enter a valid ID like "2506.00839" or "2506.00821"</div>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-cancel" id="modal-cancel">Cancel</button>
+                <button class="modal-btn modal-btn-submit" id="modal-submit">Open Paper</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', path='js/index.js') }}"></script>
+</body>
+</html>

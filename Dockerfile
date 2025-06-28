@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 8000
 
 # Run the app with Uvicorn
-CMD ["bash", "-c", "sleep 25 && python run_webapp.py --host 0.0.0.0 --port 8000"]
+CMD ["bash", "-c", "python webapp.py --host 0.0.0.0 --port 8000"]

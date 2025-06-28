@@ -1,14 +1,102 @@
 [
     {
-        "type": "simple_search",
-        "query": "What is machine learning?"
+        "query": "What is the transformer architecture in deep learning?",
+        "complexity": "basic"
     },
     {
-        "type": "complex_semantic", 
-        "query": "Explain the relationship between artificial intelligence and data science"
+        "query": "Recent papers on black hole thermodynamics",
+        "complexity": "basic"
     },
     {
-        "type": "factual_lookup",
-        "query": "What are the key benefits of neural networks?"
+        "query": "Overview of quantum computing for beginners",
+        "complexity": "basic"
+    },
+    {
+        "query": "What is the difference between CNN and RNN?",
+        "complexity": "basic"
+    },
+    {
+        "query": "Introduction to graph neural networks",
+        "complexity": "basic"
+    },
+    {
+        "query": "Papers explaining gradient descent with examples",
+        "complexity": "basic"
+    },
+    {
+        "query": "Applications of machine learning in healthcare",
+        "complexity": "basic"
+    },
+    {
+        "query": "Top papers on reinforcement learning basics",
+        "complexity": "basic"
+    },
+    {
+        "query": "Survey papers on large language models post-2023",
+        "complexity": "intermediate"
+    },
+    {
+        "query": "Optimization techniques in federated learning systems",
+        "complexity": "intermediate"
+    },
+    {
+        "query": "Impact of dropout in transformer-based architectures",
+        "complexity": "intermediate"
+    },
+    {
+        "query": "Statistical methods for uncertainty estimation in neural networks",
+        "complexity": "intermediate"
+    },
+    {
+        "query": "Cross-modal retrieval using vision-language models",
+        "complexity": "intermediate"
+    },
+    {
+        "query": "Causal inference approaches in observational data analysis",
+        "complexity": "intermediate"
+    },
+    {
+        "query": "Neurosymbolic reasoning in hybrid AI systems",
+        "complexity": "intermediate"
+    },
+    {
+        "query": "Energy-efficient neural network pruning strategies",
+        "complexity": "intermediate"
+    },
+    {
+        "query": "Meta-learning algorithms for few-shot classification",
+        "complexity": "intermediate"
+    },
+    {
+        "query": "Contrastive learning frameworks for unsupervised speech representation learning",
+        "complexity": "advanced"
+    },
+    {
+        "query": "Mitigating catastrophic forgetting in continual reinforcement learning",
+        "complexity": "advanced"
+    },
+    {
+        "query": "Formal verification methods for neural network safety in autonomous systems",
+        "complexity": "advanced"
+    },
+    {
+        "query": "Homotopy theory applications in topological quantum field theory",
+        "complexity": "advanced"
+    },
+    {
+        "query": "Adversarial robustness of diffusion models under distributional shifts",
+        "complexity": "advanced"
+    },
+    {
+        "query": "Quantum entanglement entropy in holographic duality",
+        "complexity": "advanced"
+    },
+    {
+        "query": "Neural implicit representations for 3D scene reconstruction under occlusions",
+        "complexity": "advanced"
+    },
+    {
+        "query": "Transformer-based retrieval-augmented generation in multilingual question answering",
+        "complexity": "advanced"
     }
 ]

@@ -25,7 +25,7 @@ Whether you're a researcher, student, or curious mind, PaperSense helps you expl
 - 🌐 **Clean Web UI**: Intuitive interface to search, explore, and read abstracts.
 - 📈 **Ranking by Relevance**: Results ranked by semantic closeness—not just keyword count.
 - 🧠 **Paper-Specific Chatbot**: Powered by MindsDB AI agents, enabling intelligent, context-aware conversations with individual research papers.
-
+- 🗃️ **Support for multiple vector bases**: This app has support for chromaDB and pgVector. Enable them at the config file.
 
 ---
 
@@ -48,7 +48,7 @@ There are 2 ways to install.
 
 ## High Level Architecture
 
-![architecture](assests/Papersense.svg)
+![architecture](assests/architecture.svg)
 
 #### Manual Installation
 
@@ -88,7 +88,7 @@ docker-compose up --build
 
 #### Configuration Settings
 
-Refer [YAML Config Settings][/assests/yaml_config.md]
+Refer [YAML Config Settings](/assests/yaml_config.md)
 
 These settings are important for running and testing the app.
 
@@ -116,17 +116,13 @@ For detailed instructions on stress testing refer [Stress](/assests/stress.md)
 
 Refer [checklist](assests/checklist.md)
 
-## 🧪 Roadmap
-
-- [ ] Author-based filtering
-- [ ] Citation graph view
-- [ ] Personalized recommendations
-- [ ] Save & tag favorite papers
-
 ---
 
 ### 🙏 Acknowledgments
 
+```markdown
+
 - [arXiv.org](https://arxiv.org/)
 - [OpenAI](https://openai.com/)
 - [MindsDB](https://mindsdb.com/)
+```

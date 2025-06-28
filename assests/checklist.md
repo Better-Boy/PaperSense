@@ -64,7 +64,7 @@ You can claim this if:
 
 ### ** 🏷️ Performance Benchmarking**
 
-- [ ] Create a reproducible benchmark report to provide concrete performance numbers for specific scenarios. For example, select a reasonably sized dataset (e.g., 10k, 100k, 1M+ rows, specify size), document their test environment (hardware/cloud specs, MindsDB version/config), methodology (e.g., script used), and report clear metrics (e.g., total ingestion time, time per 1k records, average/p95/p99 query latency over N queries of varying complexity).
+- [x] Create a reproducible benchmark report to provide concrete performance numbers for specific scenarios. For example, select a reasonably sized dataset (e.g., 10k, 100k, 1M+ rows, specify size), document their test environment (hardware/cloud specs, MindsDB version/config), methodology (e.g., script used), and report clear metrics (e.g., total ingestion time, time per 1k records, average/p95/p99 query latency over N queries of varying complexity).
 
 ---
 

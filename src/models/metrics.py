@@ -1,11 +1,12 @@
-from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
+
 
 # Configuration Classes
 # Not using pydantic as it's slower compared to dataclass due to validation, parsing
 @dataclass
 class PerformanceMetrics:
     """Performance metrics container"""
+
     total_time: float
     memory_usage_mb: float
     cpu_usage_percent: float
@@ -20,6 +21,7 @@ class PerformanceMetrics:
 @dataclass
 class ChunkMetrics:
     """Metrics for chunk processing"""
+
     chunk_id: str
     processing_time_ms: float
     size_bytes: int
@@ -29,6 +31,7 @@ class ChunkMetrics:
 @dataclass
 class BatchMetrics:
     """Metrics for batch processing"""
+
     batch_id: int
     batch_size: int
     total_time_ms: float
@@ -41,6 +44,7 @@ class BatchMetrics:
 @dataclass
 class FileMetrics:
     """Metrics for file processing"""
+
     file_id: str
     total_chunks: int
     processing_time_ms: float
