@@ -28,7 +28,7 @@ Whether you're a researcher, student, or curious mind, PaperSense helps you expl
 - 🗃️ **Support for multiple vector bases**: This app has support for chromaDB and pgVector. Enable them at the config file.
 - 📝 **AI based paper summary**: Summarize lengthly papers to a few words
 - 🪄 **AI based idea generation**: Generate futuristic ideas derived from a research paper
-
+- **Periodic Evaluation**: Periodic evaluations are run to check the accuracy of the semantic search engine
 ---
 
 ## 🛠️ Tech Stack
@@ -44,6 +44,17 @@ Whether you're a researcher, student, or curious mind, PaperSense helps you expl
 ## High Level Architecture
 
 ![architecture](assests/architecture.svg)
+
+|      Papersense feature           | Powered by MindsDB feature  |
+| --------------------------------- | --------------------------- |
+| Semantic Search                   | Knowledge bases             |
+| PDF Chatbot                       | Agents + Knowledge bases    |
+| AI summarizer                     | AI tables                   |
+| AI generate ideas                 | AI tables                   |
+| Periodic Evaluation               | JOBS + EVALUATE command     |
+| Cron based uploading new papers   | JOBS                        |
+
+
 
 ## ⚙️ Installation
 
