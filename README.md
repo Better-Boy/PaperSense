@@ -77,8 +77,8 @@ cd papersense
 pip install -r requirements.txt
 ```
 
-3. Create postgres docker container
-3. Set your API keys as an environment variable
+4. Create the postgres database - arxiv_psql_db
+5. Set your API keys as an environment variable
 
 ```bash
 export OPENAI_API_KEY=your_key_here
