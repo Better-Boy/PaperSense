@@ -35,7 +35,7 @@ agent:
 app:
   log_level: INFO
   log_format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-  load_sample_data: False
+  load_sample_data: True
   sample_data_count: 10
   openai_api_key: <sk-proj>
 

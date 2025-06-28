@@ -53,7 +53,7 @@ Whether you're a researcher, student, or curious mind, PaperSense helps you expl
 | AI generate ideas                 | AI tables                   |
 | Periodic Evaluation               | JOBS + EVALUATE command     |
 | Cron based uploading new papers   | JOBS                        |
-
+| Fast search queries               | CREATE INDEX command        |
 
 
 ## ⚙️ Installation
