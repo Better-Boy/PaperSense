@@ -26,6 +26,8 @@ Whether you're a researcher, student, or curious mind, PaperSense helps you expl
 - 📈 **Ranking by Relevance**: Results ranked by semantic closeness—not just keyword count.
 - 🧠 **Paper-Specific Chatbot**: Powered by MindsDB AI agents, enabling intelligent, context-aware conversations with individual research papers.
 - 🗃️ **Support for multiple vector bases**: This app has support for chromaDB and pgVector. Enable them at the config file.
+- 📝 **AI based paper summary**: Summarize lengthly papers to a few words
+- 🪄 **AI based idea generation**: Generate futuristic ideas derived from a research paper
 
 ---
 
@@ -39,16 +41,15 @@ Whether you're a researcher, student, or curious mind, PaperSense helps you expl
 - **Python Linter** : [ruff](https://docs.astral.sh/ruff/)
 
 ---
+## High Level Architecture
+
+![architecture](assests/architecture.svg)
 
 ## ⚙️ Installation
 
 **Before running the application, go over the configuration settings once**
 
 There are 2 ways to install.
-
-## High Level Architecture
-
-![architecture](assests/architecture.svg)
 
 #### Manual Installation
 
@@ -65,6 +66,7 @@ cd papersense
 pip install -r requirements.txt
 ```
 
+3. Create postgres docker container
 3. Set your API keys as an environment variable
 
 ```bash
@@ -74,7 +76,7 @@ export OPENAI_API_KEY=your_key_here
 Then run the server:
 
 ```bash
-python run_webapp.py
+python webapp.py
 ```
 
 #### Docker Installation
