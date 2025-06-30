@@ -182,7 +182,9 @@ The benchmark test revealed acceptable performance with some areas for improveme
 
 ## Testing Process and Methodology
 
-This  test adheres to a standardized methodology to ensure consistent and reproducible results.
+This test adheres to a standardized methodology to ensure consistent and reproducible results.
+
+Difference between benchmarking and stress testing is just that benchmarking is testing under normal conditions like upto 10 users and stress testing is testing concurrent 100 users. Hence, this test script is configurable enough to do both benchmarking and stress testing.
 
 ### Executing the Test Script: A How-To
 

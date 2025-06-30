@@ -148,35 +148,15 @@ Resource usage graph:
 
 **Error #1:**
 - **Timestamp**: 2025-06-30T08:24:20.331467
-- **Status Code**: 0
-- **Error Message**: Search failed: 0
-- **Response Text**: No response body
+- **Status Code**: 429
+- **Error Message**: Search failed: 429
+- **Response Text**: raise RuntimeError('Event loop is closed')
 
 **Error #2:**
 - **Timestamp**: 2025-06-30T08:24:19.991129
-- **Status Code**: 0
-- **Error Message**: Search failed: 0
-- **Response Text**: No response body
-
-**Error #3:**
-- **Timestamp**: 2025-06-30T08:24:18.905240
-- **Status Code**: 0
-- **Error Message**: Search failed: 0
-- **Response Text**: No response body
-
-**Error #4:**
-- **Timestamp**: 2025-06-30T08:24:18.267880
-- **Status Code**: 0
-- **Error Message**: Search failed: 0
-- **Response Text**: No response body
-
-**Error #5:**
-- **Timestamp**: 2025-06-30T08:24:16.074257
-- **Status Code**: 0
-- **Error Message**: Search failed: 0
-- **Response Text**: No response body
-
-
+- **Status Code**: 429
+- **Error Message**: Search failed: 429
+- **Response Text**: raise RuntimeError('Event loop is closed')
 
 ## Performance Recommendations
 
@@ -222,7 +202,9 @@ The stress test identified significant performance challenges. The system achiev
 
 ## Testing Process and Methodology
 
-This  test adheres to a standardized methodology to ensure consistent and reproducible results.
+This test adheres to a standardized methodology to ensure consistent and reproducible results.
+
+Difference between benchmarking and stress testing is just that benchmarking is testing under normal conditions like upto 10 users and stress testing is testing concurrent 100 users. Hence, this test script is configurable enough to do both benchmarking and stress testing.
 
 ### Executing the Test Script: A How-To
 
@@ -308,10 +290,10 @@ Users spawned per second
 MindsDB pid has to be given in order to run the test script.
 
 9. Once the test is complete, 3 files are created - 
-1. `performance_dashboard.png` - An image file that shows the mindsdb process resource usage
-2. `stress_test_report_<timestamp>.md` - The stress test report
-3. `benchmark_test_report_<timestamp>.md` - The benchmark test report
-4. `activity.csv` - The resource utilization numbers of the mindsdb process collected during the test.
+    1. `performance_dashboard.png` - An image file that shows the mindsdb process resource usage
+    2. `stress_test_report_<timestamp>.md` - The stress test report
+    3. `benchmark_test_report_<timestamp>.md` - The benchmark test report
+    4. `activity.csv` - The resource utilization numbers of the mindsdb process collected during the test.
 
 
 ---
