@@ -12,8 +12,8 @@
 
 Whether you're a researcher, student, or curious mind, PaperSense helps you explore the arXiv like never before.
 
-- Demo Video - Check out Papersense in action on [Youtube](https://www.youtube.com)
-- DevTo Article - My experience building Papersense [DevTo]()
+- Demo Video - Check out Papersense in action on [Youtube](https://www.youtube.com/watch?v=_Aw-lg2cKbA)
+- DevTo Article - My experience building Papersense [DevTo](https://dev.to/better-boy/papersense-semantic-arxiv-search-chat-built-with-mindsdb-1kfi)
 
 ---
 
