@@ -39,23 +39,3 @@ app:
   sample_data_count: 5
   openai_api_key: <sk-proj>
 
-benchmark:
-  batch_sizes: [10]
-  data_sizes: [1000]
-  test_data_path: ../data/new_data.json
-  queries_file_path: ../data/queries.json
-  baseline_metrics_path: ../data/baseline.json
-  output_dir: test_reports
-  use_continuous_monitoring: True
-  resource_sample_rate: 0.1
-
-stress:
-  batch_size: 50
-  test_data_path: ../data/new_data.json
-  queries_file_path: ../data/queries.json
-  baseline_metrics_path: ../data/baseline.json
-  output_dir: test_reports
-  concurrent_users: [3]
-  data_sizes: [1500]
-  use_continuous_monitoring: True
-  resource_sample_rate: 0.1

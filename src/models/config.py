@@ -79,68 +79,6 @@ class AgentConfig(BaseModel):
 
     openai_model: str = Field(default=None, description="AI model name")
 
-
-class BenchmarkConfig(BaseModel):
-    """Benchmark Test configuration."""
-
-    batch_sizes: List[int] = Field(
-        default=[], description="List of different batch sizes to test"
-    )
-    data_sizes: List[int] = Field(
-        default=[], description="List of different number of data sizes"
-    )
-    test_data_path: str = Field(default=None, description="test data file path")
-    baseline_metrics_path: str = Field(
-        default=None, description="baseline metrics to use for comparison"
-    )
-    output_dir: str = Field(default=None, description="directory for test results")
-    iterations: int = Field(
-        default=None, description="number of times to repeat the test"
-    )
-    queries_file_path: str = Field(
-        default=None, description="Queries to test data file path"
-    )
-    use_continuous_monitoring: bool = Field(
-        default=None, description="Whether to use continuous monitoring"
-    )
-    resource_sample_rate: float = Field(
-        default=None, description="Sampling interval for continuous monitoring"
-    )
-
-
-class StressConfig(BaseModel):
-    """Stress Test config"""
-
-    batch_size: int = Field(default=None, description="Batch size for insertion")
-    queries_file_path: str = Field(
-        default=None, description="Queries to test data file path"
-    )
-    test_data_path: str = Field(default=None, description="test data file path")
-    baseline_metrics_path: str = Field(
-        default=None, description="baseline metrics to use for comparison"
-    )
-    output_dir: str = Field(default=None, description="directory for test results")
-    concurrent_users: List[int] = Field(
-        default=[],
-        description="List of different number of concurrent users to test querying",
-    )
-    max_concurrent_users: int = Field(
-        default=None, description="Maximum concurrent users"
-    )
-    max_data_size: int = Field(
-        default=None, description="Maximum data size used for insertion and querying"
-    )
-    data_sizes: List[int] = Field(
-        default=[], description="List of different number of data sizes"
-    )
-    use_continuous_monitoring: bool = Field(
-        default=None, description="Whether to use continuous monitoring"
-    )
-    resource_sample_rate: float = Field(
-        default=None, description="Sampling interval for continuous monitoring"
-    )
-
-
 class PaperSenseConfig(BaseSettings):
     """Main configuration model for PaperSense application."""
 
@@ -149,5 +87,3 @@ class PaperSenseConfig(BaseSettings):
     knowledge_base: KnowledgeBaseConfig = Field(default_factory=KnowledgeBaseConfig)
     agent: AgentConfig = Field(default_factory=AgentConfig)
     app: AppConfig = Field(default_factory=AppConfig)
-    benchmark: BenchmarkConfig = Field(default_factory=BenchmarkConfig)
-    stress: StressConfig = Field(default_factory=StressConfig)

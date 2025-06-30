@@ -182,7 +182,7 @@ def set_config(config_path: Optional[Path] = None):
     global _config
     _config = create_config_with_env_overrides(config_path)
 
-    global mdb_infra, kb, psql, agent, app, kb_storage, benchmark_test, stress_test
+    global mdb_infra, kb, psql, agent, app, kb_storage
 
     mdb_infra = _config.mindsdb_infra
     kb = _config.knowledge_base
@@ -190,8 +190,6 @@ def set_config(config_path: Optional[Path] = None):
     agent = _config.agent
     app = _config.app
     kb_storage = kb.storage
-    benchmark_test = _config.benchmark
-    stress_test = _config.stress
     logger.info("Configuration updated successfully")
 
 
@@ -204,8 +202,6 @@ try:
     agent = config.agent
     app = config.app
     kb_storage = kb.storage
-    benchmark_test = config.benchmark
-    stress_test = config.stress
     logger.info("Configuration module initialized successfully")
 
 except Exception as e:

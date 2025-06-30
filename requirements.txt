@@ -5,7 +5,6 @@ mindsdb_sdk
 psycopg2_binary
 pyyaml
 requests
-mindsdb_sql
 uvicorn
 Jinja2
 pydantic
@@ -15,3 +14,10 @@ PyPDF2
 litellm==1.73.1
 litellm-enterprise==0.1.7
 litellm-proxy-extras==0.2.3
+gevent
+locust
+psutil
+pandas
+matplotlib
+numpy
+seaborn

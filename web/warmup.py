@@ -140,7 +140,7 @@ class WarmUp:
             FileNotFoundError: If data file doesn't exist
             json.JSONDecodeError: If JSON is invalid
         """
-        data_file_path = Path(__file__).parent.parent / "data/new_data.json"
+        data_file_path = Path(__file__).parent.parent / "data/sample_data.json"
         logger.info(f"Loading sample data from '{data_file_path}'")
 
         if not data_file_path.exists():

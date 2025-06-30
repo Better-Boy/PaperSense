@@ -34,19 +34,7 @@ class FileProcessingError(Exception):
 
 
 def build_values_clause(records: List[Dict[str, Any]], columns: List[str]) -> str:
-    """
-    Generate VALUES clause for SQL INSERT statement.
-
-    Args:
-        records: List of dictionaries containing record data
-        columns: List of column names to include
-
-    Returns:
-        String representation of VALUES clause
-
-    Raises:
-        ValueError: If records or columns are empty
-    """
+    """ Generate VALUES clause for SQL INSERT statement."""
     if not records or not columns:
         logger.error("Cannot build VALUES clause: records and columns cannot be empty")
         raise ValueError("Records and columns cannot be empty")
@@ -193,43 +181,26 @@ def build_create_kb_query(name: str) -> str:
             storage = (
                 f"storage = {config.kb_storage.pg_vector_database}.{pg_vec_table},"
             )
-        ollama_query = f"""
+        query = f"""
             CREATE KNOWLEDGE_BASE IF NOT EXISTS {name}
             USING
                 {storage}
                 embedding_model = {{
-                    "provider": "ollama",
-                    "model_name" : "nomic-embed-text",
-                    "base_url":"http://localhost:11434"
+                    "provider": "openai",
+                    "model_name": "{config.kb.embedding_model}",
+                    "api_key": "{config.app.openai_api_key}"
                 }},
                 reranking_model = {{
-                    "provider": "ollama",
-                    "model_name": "llama3.2",
-                    "base_url":"http://localhost:11434"
+                    "provider": "openai", 
+                    "model_name": "{config.kb.reranking_model}",
+                    "api_key": "{config.app.openai_api_key}"
                 }},
                 content_columns = [{content_cols}],
                 metadata_columns = [{metadata_cols}];
             """
-        # openai_query = f"""
-        #     CREATE KNOWLEDGE_BASE IF NOT EXISTS {name}
-        #     USING
-        #         {storage}
-        #         embedding_model = {{
-        #             "provider": "openai",
-        #             "model_name": "{config.kb.embedding_model}",
-        #             "api_key": "{config.app.openai_api_key}"
-        #         }},
-        #         reranking_model = {{
-        #             "provider": "openai", 
-        #             "model_name": "{config.kb.reranking_model}",
-        #             "api_key": "{config.app.openai_api_key}"
-        #         }},
-        #         content_columns = [{content_cols}],
-        #         metadata_columns = [{metadata_cols}];
-        #     """
 
         logger.info(f"Successfully built CREATE KNOWLEDGE_BASE query for '{name}'")
-        return ollama_query
+        return query
 
     except KeyError as e:
         logger.error(f"Missing required config value for knowledge base creation: {e}")

@@ -125,7 +125,7 @@ class KnowledgeBase:
             True if drop successful, False otherwise
         """
         try:
-            self.conn.execute_query(f"DROP KNOWLEDGE BASE {name}")
+            self.conn.execute_query(f"DROP KNOWLEDGE_BASE {name}")
             logger.info("Successfully dropped knowledge base: %s", name)
             return True
         except Exception as e:
