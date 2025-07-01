@@ -105,27 +105,26 @@ class Plot:
 
         print(f"Dashboard saved as '{f_name}'")
 
-    def generate_resource_usage_md(self, test_type):
+    def generate_resource_usage_md(self, output_dir: str):
         try:
-            df = pd.read_csv(f"{test_type}_activity.csv")
-            plot_f_name = f"{test_type}_resource_usage.png"
+            df = pd.read_csv(f"{output_dir}/activity.csv")
+            plot_f_name = f"{output_dir}/resource_usage.png"
             self.plot_resource_values(df, plot_f_name)
             mem_max = df["mem_real"].max()
             mem_avg = df["mem_real"].mean()
             cpu_percent_max = df["cpu"].max()
             cpu_percent_avg = df['cpu'].mean()
 
-            return f"""
-            #### Key Metrics
+            return f"""#### Key Metrics
             
-            - **Max memory usage**: {mem_max:,.2f} MB
-            - **Average memory usage (MB)**: {mem_avg:,.2f} MB
-            - **Max CPU usage (%)**: {cpu_percent_max:,.2f} MB
-            - **Average CPU usage (%)**: {cpu_percent_avg:,.2f} MB
-            
-            Resource usage graph:
+- **Max memory usage**: {mem_max:,.2f} MB\n
+- **Average memory usage (MB)**: {mem_avg:,.2f} MB\n
+- **Max CPU usage (%)**: {cpu_percent_max:,.2f}\n
+- **Average CPU usage (%)**: {cpu_percent_avg:,.2f}\n
 
-            ![plot]({plot_f_name})
+Resource usage graph:
+
+![plot](resource_usage.png)
             """
 
         except Exception as e:

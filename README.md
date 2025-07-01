@@ -77,7 +77,10 @@ cd papersense
 pip install -r requirements.txt
 ```
 
-4. Create the postgres database - arxiv_psql_db
+4. This project needs an active postgres database running. In order to update the postgres related config like host, port etc. refer to the [YAML Config Settings](/assests/yaml_config.md)
+
+5. Manually, create a new database with name - `arxiv_psql_db` or the one you mention in the config - `postgres.database`. If you want to give a different database name, then don't forget to update the field `postgres.database` in the yaml file.
+
 5. Set your API keys as an environment variable
 
 ```bash
@@ -119,11 +122,12 @@ These settings are important for running and testing the app.
 - Benchmark and Stress testing
 - Detailed documentation in README
 - [ruff](https://github.com/astral-sh/ruff) linting and formatting
+- Benchmark and stress testing using locust
 
 ## Testing
 
-For detailed instructions on benchmark testing refer [Benchmark](/assests/benchmark.md)
-For detailed instructions on stress testing refer [Stress](/assests/stress.md)
+For detailed instructions on benchmark testing refer [Benchmark](/reports/benchmark.md)
+For detailed instructions on stress testing refer [Stress](/reports/stress.md)
 
 ## Quest Checklist
 
@@ -134,7 +138,6 @@ Refer [checklist](assests/checklist.md)
 ### 🙏 Acknowledgments
 
 ```markdown
-
 - [arXiv.org](https://arxiv.org/)
 - [OpenAI](https://openai.com/)
 - [MindsDB](https://mindsdb.com/)

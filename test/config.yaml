@@ -1,0 +1,21 @@
+mindsdb_infra:
+  host: http://127.0.0.1
+  port: 47334
+  mindsdb_pid: 410423
+
+benchmark:
+  data_size: 1000
+  test_data_path: /home/abhi/latest/PaperSense/data/processed_data_1000.json
+  queries_file_path: /home/abhi/latest/PaperSense/data/queries.json
+  output_dir: reports/benchmark_tests/scenario_9
+  iterations: 1
+
+stress:
+  data_size: 1000
+  test_data_path: /home/abhi/latest/PaperSense/data/processed_data_1000.json
+  queries_file_path: /home/abhi/latest/PaperSense/data/queries.json
+  output_dir: reports/stress_tests/scenario_4
+  concurrent_users: 100
+  spawn_rate: 4
+  test_runtime: 180
+
