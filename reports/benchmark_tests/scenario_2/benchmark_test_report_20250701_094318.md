@@ -12,10 +12,10 @@
 
 | Metric | Value | Status |
 |--------|-------|--------|
-| **Total Requests** | 1,026 | ✅ |
-| **Success Rate** | 99.8% | ✅ |
-| **Successful Requests** | 1,024 | - |
-| **Failed Requests** | 2 | ⚠️ |
+| **Total Requests** | 5026 | ✅ |
+| **Success Rate** | 98% | ✅ |
+| **Successful Requests** | 4925 | - |
+| **Failed Requests** | 101 | ⚠️ |
 | **Average Response Time** | 2.515s | ⚠️ |
 
 ### 🎯 Overall Assessment
@@ -92,8 +92,8 @@
 
 | Metric | Value |
 |--------|-------|
-| Total Requests | 999 |
-| Successful Requests | 997 |
+| Total Requests | 4900 |
+| Successful Requests | 4890 |
 | Success Rate | 99.80% |
 | Average Response Time | 2.208s |
 | Median Response Time | 2.026s |
