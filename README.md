@@ -126,7 +126,7 @@ These settings are important for running and testing the app.
 
 ## Testing
 
-For detailed instructions on benchmark testing refer [Benchmark](/reports/benchmark.md)
+For detailed instructions on benchmark testing refer [Benchmark](/reports/benchmark.md)  
 For detailed instructions on stress testing refer [Stress](/reports/stress.md)
 
 ## Quest Checklist

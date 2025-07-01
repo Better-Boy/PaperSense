@@ -10,7 +10,7 @@ The stress testing depends heavily on the number of concurrent users.
 
 1. Downloaded 12,000 arxiv pdf papers from different categories stored at Google Cloud Storage. For more info, refer the bulk access section [Kaggle Arxiv](https://www.kaggle.com/datasets/Cornell-University/arxiv)
 2. Downloading the pdfs from the google cloud storage took almost 2 hours.
-3. Processed each pdf via a data processing pipeline. The pipeline code is [bulk_data_processing.py](../bulk_data_processing.py)
+3. Processed each pdf via a data processing pipeline. The pipeline code is [bulk_data_processing.py](../src/bulk_data_processing.py)
 4. The data processing pipeline for the 12,000 pdfs ran for almost 4 hours.
 3. The different data sizes i.e paper counts - 1k, 5k, 10k were stored. The size of the individual files are large and can be found at []()
 4. A sample data is included in this repository - [sample test data](../data/test_data.json)
