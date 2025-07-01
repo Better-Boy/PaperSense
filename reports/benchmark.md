@@ -90,7 +90,7 @@ You can get the pid of the mindsdb process by running - `ps -ef | grep mindsdb`.
 Running the script:
 
 ```bash
-python benchmark.py
+python test/benchmark.py
 ```
 
 MindsDB pid has to be given in order to run the test script.
@@ -116,7 +116,7 @@ Note:
 #### Scenario 2:
 
 - Description - Inserting 5000 research papers approx around 500MB of text data
-- Benchmark report - [Scenario 1](benchmark_tests/scenario_2/benchmark_test_report_20250701_094318.md)
+- Benchmark report - [Scenario 2](benchmark_tests/scenario_2/benchmark_test_report_20250701_094318.md)
 
 
 ### 📝 Summary & Conclusion

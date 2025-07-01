@@ -1,4 +1,4 @@
-# API Benchmark Report
+# MindsDB Knowledge Base Benchmark Report
 
 **Generated on:** 2025-07-01 08:34:11  
 **Total Test Duration:** 1459.01 seconds  

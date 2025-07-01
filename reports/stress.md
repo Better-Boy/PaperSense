@@ -91,7 +91,7 @@ You can get the pid of the mindsdb process by running - `ps -ef | grep mindsdb`.
 Running the script:
 
 ```bash
-python stress.py
+python test/stress.py
 ```
 
 MindsDB pid has to be given in order to run the test script.

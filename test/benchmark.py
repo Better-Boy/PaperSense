@@ -283,7 +283,7 @@ class KnowledgeBaseBenchmarkTest:
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         summary = stats['summary']
         
-        md = f"""# API Benchmark Report
+        md = f"""# MindsDB Knowledge Base Benchmark Report
 
 **Generated on:** {timestamp}  
 **Total Test Duration:** {summary['total_duration']:.2f} seconds  
