@@ -86,8 +86,9 @@ pip install -r requirements.txt
 ```bash
 export OPENAI_API_KEY=your_key_here
 ```
+6. Bring up the mindsdb server and mention the relevant host and port in the config file.
 
-Then run the server:
+7. Then run the app:
 
 ```bash
 python webapp.py
