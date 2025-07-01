@@ -78,7 +78,8 @@ The knowledge is created before starting the test and cleaned up afterwards.
 6. On running the test script, a subprocess is spawned which monitors the resource usage of mindsdb process during test duration. 
 7. The subprocess will be terminated after successful completion of load test.
 
-**Imp**
+**Imp**  
+
 8. Find the pid of the mindsdb process. 
 
 MindsDB spawns multiple subprocess, it's important to find the main mindsdb process.
