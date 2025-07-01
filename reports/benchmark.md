@@ -85,7 +85,7 @@ MindsDB spawns multiple subprocess, it's important to find the main mindsdb proc
 
 You can get the pid of the mindsdb process by running - `ps -ef | grep mindsdb`. But you need to find the main (or parent) process.
 
-9. Mention the pid in the `test/config.yaml` for the config `mindsdb_infra.mindsdb_pid`. 
+9. Mention the pid in the `test/config.yaml` for the config key `mindsdb_infra.mindsdb_pid`. 
 
 Running the script:
 
