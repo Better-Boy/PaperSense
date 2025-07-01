@@ -70,5 +70,5 @@ You can claim this if:
 
 ### ** 🏷️ Stress Testing**
 
-- [ ] Stress-test the system by systematically increasing load. For example, by using very large datasets, a high number of concurrent queries, or deeply nested/complex semantic queries, until KB operations either fail or exhibit unacceptable latency. Create a report to document the configuration used, load parameters, sequence of steps executed, and the observed failure mode or point of performance degradation.
+- [x] Stress-test the system by systematically increasing load. For example, by using very large datasets, a high number of concurrent queries, or deeply nested/complex semantic queries, until KB operations either fail or exhibit unacceptable latency. Create a report to document the configuration used, load parameters, sequence of steps executed, and the observed failure mode or point of performance degradation.
 
