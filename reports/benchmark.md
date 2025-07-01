@@ -14,7 +14,7 @@ If concurrent benchmarking is needed, refer to stress testing with low maximum c
 2. Downloading the raw pdfs from the google cloud storage took almost 2 hours.
 3. Processed each pdf via a data processing pipeline. The pipeline code is [bulk_data_processing.py](../src/bulk_data_processing.py)
 4. The data processing pipeline for the 12,000 pdfs ran for almost 4 hours.
-5. The different data sizes i.e paper counts - 1k, 5k, 10k were stored. The size of the individual files are large and can be found at [Gdrive]()
+5. The different data sizes i.e paper counts - 1k, 5k, 10k were stored. The size of the individual files are large.
 6. A sample data is included in this repository - [sample test data](../data/test_data.json)
 
 ### How to run the benchmark testing script?
